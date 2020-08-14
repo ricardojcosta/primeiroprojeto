@@ -6,6 +6,18 @@ import java.util.Scanner;
 public class excecao {
 
     public static void main(String[] args) {
+        metodo1();
+        System.out.println("Termino do programa");
+    }
+
+    public static void metodo1() {
+        System.out.println("Iniciando metodo 1");
+        metodo2();
+        System.out.println("Finalizando metodo 1");
+    }
+
+    public static void metodo2() {
+        System.out.println("Iniciando metodo 2");
         Scanner sc = new Scanner(System.in);
 
         try {
@@ -15,12 +27,9 @@ public class excecao {
 
         } catch (InputMismatchException e) {
             System.out.println("Não existe indice com letras");
-        }
-        catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Indice inexistente");
         }
-
-        System.out.println("Fim do prorama");
-
+        System.out.println("Fim do método 2");
     }
 }
