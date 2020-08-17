@@ -33,27 +33,34 @@ public class reserva {
     public void setNumeroreserva(int numeroreserva) {
         this.numeroreserva = numeroreserva;
     }
-    
-    public long duracao(){
+
+    public long duracao() {
         long diff = checkout.getTime() - checkin.getTime();
         return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }
-    
-    public void atualizareserva(Date checkin, Date checkout){
-        this.checkin=checkin;
-        this.checkout=checkout;
+
+    public String atualizareserva(Date checkin, Date checkout) {
+        Date now = new Date();
+        if (checkin.before(now) || checkout.before(now)) {
+            return "Erro na reserva,"
+                    + " as datas para atualização"
+                    + " precisam ser futuras";
+        } else if (!checkout.after(checkin)) {
+            return "Erro na reserva,"
+                    + " a data de Check-out"
+                    + " precisa ser depois da data de Check-in";
+        }
+        this.checkin = checkin;
+        this.checkout = checkout;
+        return null;
     }
 
     @Override
     public String toString() {
-        return "Numero da reserva=" + numeroreserva + ",Data de checkin=" + 
-                sdf.format(checkin) + 
-                ", Data de checkout=" + sdf.format(checkout)+
-                ", " +duracao()+" noites";
+        return "Numero da reserva=" + numeroreserva + ",Data de checkin="
+                + sdf.format(checkin)
+                + ", Data de checkout=" + sdf.format(checkout)
+                + ", " + duracao() + " noites";
     }
-    
-    
-    
-    
 
 }
